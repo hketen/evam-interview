@@ -1,0 +1,60 @@
+/* app css stylesheet */
+body {
+    padding-top: 56px;
+}
+
+
+.jumbotron {
+    margin-top: 20px;
+}
+
+.dashboard-forms {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.dashboard-forms .card {
+    width: 48%;
+    margin: 1%;
+}
+
+.evam-header .text-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.evam-header .form-control {
+    max-width: 280px;
+    width: 30% !important;
+}
+
+.form-group .form-check {
+    margin-top: 38px;
+}
+
+.form-group.remove-item {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.field-actions {
+    text-align: right;
+}
+
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    line-height: 20px;
+    margin-bottom: 0;
+    width: unset;
+    font-size: 18px;
+    padding: 0 20px;
+}
+
+.the-fieldset {
+    border: 1px solid #ddd;
+    padding: 20px;
+}

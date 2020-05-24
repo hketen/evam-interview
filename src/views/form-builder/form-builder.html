@@ -1,0 +1,165 @@
+<div class="evam-header d-flex align-items-center p-3 my-3 rounded shadow-sm">
+    <img class="mr-3" src="/assets/images/logo-2x.png" alt="" height="32">
+    <div class="text-container lh-100">
+        <h6 class="mb-0 lh-100">Form Builder</h6>
+        <small></small>
+    </div>
+    <input class="form-control mr-sm-2"
+           type="search"
+           placeholder="Search"
+           aria-label="Search"
+           ng-model="formFilter">
+    <button
+            type="button"
+            class="btn btn-outline-primary"
+            data-toggle="modal"
+            data-target="#formModal">
+        Add Form
+    </button>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Form Name</th>
+            <th scope="col">Form Description</th>
+            <th scope="col">Fields Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="form in forms | filter: formFilter">
+            <th scope="row">{{$index+1}}</th>
+            <td>{{form.name}}</td>
+            <td>{{form.description}}</td>
+            <td>{{form.fields.length}}</td>
+        </tr>
+    </tbody>
+</table>
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog"
+     aria-labelledby="formModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formModalTitle">Create New Form</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form ng-if="!!newForm">
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="formName">Form Name</label>
+                            <input
+                                    id="formName"
+                                    type="text"
+                                    class="form-control"
+                                    ng-model="newForm.name"
+                            />
+                        </div>
+                        <div class="form-group col">
+                            <label for="formDesc">Form Description</label>
+                            <input
+                                    id="formDesc"
+                                    type="text"
+                                    class="form-control"
+                                    ng-model="newForm.description"
+                            />
+                        </div>
+                    </div>
+                    <fieldset class="well the-fieldset">
+                        <legend class="the-legend">Form Fields</legend>
+
+                        <div class="form-row"
+                             ng-repeat="field in newForm.fields track by $index">
+
+                            <div class="form-group col-1 remove-item">
+                                <button
+                                        type="button"
+                                        class="btn btn-outline-secondary"
+                                        ng-click="removeField($index)"
+                                >
+                                    X
+                                </button>
+                            </div>
+
+                            <div class="form-group col-4">
+                                <label for="formName{{$index}}">
+                                    Form Name
+                                </label>
+                                <input
+                                        id="formName{{$index}}"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Field Name"
+                                        ng-model="field.name"
+                                />
+                            </div>
+                            <div class="form-group col-4">
+                                <label for="formDataType{{$index}}">State</label>
+                                <select id="formDataType{{$index}}"
+                                        class="form-control"
+                                        ng-model="field.dataType">
+                                    <option
+                                            ng-repeat="dataType in dataTypeOptions"
+                                            ng-selected="dataType.value == field.dataType"
+                                            value="{{dataType.value}}">
+
+                                        {{dataType.label}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-3">
+                                <div class="form-check">
+                                    <input
+                                            id="requiredField{{$index}}"
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            ng-model="field.required"
+                                    />
+                                    <label class="form-check-label"
+                                           for="requiredField{{$index}}">
+                                        Is Required Field?
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field-actions">
+                            <button
+                                    type="button"
+                                    class="btn btn-outline-primary btn-sm"
+                                    ng-click="addField()"
+                            >
+                                Add Field
+                            </button>
+                            <button
+                                    type="button"
+                                    class="btn btn-outline-danger btn-sm"
+                                    ng-click="removeField(0, newForm.fields.length)"
+                            >
+                                Remove All Field
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="modal-footer" ng-if="loading">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <div class="modal-footer" ng-if="!loading">
+
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="save()">
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

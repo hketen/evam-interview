@@ -1,0 +1,35 @@
+<section class="jumbotron text-center">
+    <div class="container">
+        <img class="mr-3" src="/assets/images/logo-2x.png" alt="" height="48">
+        <h1 class="jumbotron-heading">Evam Customer Journey Orhcestration</h1>
+        <p class="lead text-muted">
+            Evam is a leading technology company specializing in customer
+            journey orchestration through Continuous Intelligence capabilities.
+            It empowers telecommunication, banking, airline, retail and
+            industrial companies to process billions of touchpoints and ensure
+            the right action to be taken in real-time to derive the maximum
+            business value.
+        </p>
+        <div ng-if="!forms.length">
+            <p>
+                No forms were found. Do you want to create a form?
+            </p>
+
+            <p>
+                <a href="#!/form-builder" class="btn btn-primary my-2">
+                    Go to Form Builder
+                </a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="dashboard-forms">
+    <div class="card" ng-repeat="form in forms">
+        <div class="card-body">
+            <h5 class="card-title">{{form.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{form.description}}</h6>
+            <a href="#!/forms/{{form.name}}" class="card-link">Fill the form</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="evam-header d-flex align-items-center p-3 my-3 rounded shadow-sm">
+    <img class="mr-3" src="/assets/images/logo-2x.png" alt="" height="32">
+    <div class="text-container lh-100" ng-if="form">
+        <h6 class="mb-0 lh-100">{{form.name}}</h6>
+        <small>{{form.description}}</small>
+    </div>
+    <div class="text-container lh-100" ng-if="!form">
+        <h6 class="mb-0 lh-100">Form not found!</h6>
+        <small></small>
+    </div>
+</div>
+<form name="validationForm" ng-if="!!form">
+
+    <evam-field
+            ng-repeat="field in form.fields track by $index"
+            field="field"
+            index="$index"
+            values="values"
+    ></evam-field>
+</form>
